@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,6 +11,8 @@ using System.Windows.Forms;
 
 namespace GorselP2Ders5
 { // txtboxlara girilen değerlerden oluşan  diziyi tanımlayınız ve dizinin elemanlarını küçükten büyüğe  doğru  sıralayınız.
+    // txtboxtaki değeri butona basınca listboxa ekleyiniz.Sonra Sırala butonuna basınca Comboboxtan seçilen değere göre listboxın
+    // elemanlarını ya a-z ye doğru ya da z den a  ya doğru sıralayan form
     public partial class Form1 : Form
     {
         public Form1()
@@ -44,6 +47,36 @@ namespace GorselP2Ders5
             foreach (int item in dizim1) 
             {
                 textBox4.Text += item + "<";
+            }
+        }
+
+        private void btnEkle_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Add(textBox5.Text);
+        }
+
+        private void btnSirala_Click(object sender, EventArgs e)
+        {
+            ArrayList listem = new ArrayList(); //Arraylist oluştur
+            foreach (var item in listBox1.Items) //listbox ı Arraylist e aktar
+            {
+                listem.Add(item);
+            }
+            listBox1.Items.Clear();
+            //Comboboxta hangisi seçili ise Arraylisti ona göre sırala
+            if (comboBox1.SelectedIndex==0)
+            {
+                listem.Sort();
+            }
+            else
+            {
+                listem.Sort();
+                listem.Reverse();
+            }
+            //Arraylist i ComboBox a Aktar
+            foreach (var item in listem)
+            {
+                listBox1.Items.Add(item);
             }
         }
     }
